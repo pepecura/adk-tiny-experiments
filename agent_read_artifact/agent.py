@@ -1,3 +1,7 @@
+# Tiny experiment for uploading a file on ADK web to root agent as an artifact and passing that file to another agent for processing.
+# Key components for the task: SaveFilesAsArtifactsPlugin(), load_artifacts
+# Heads up: App name will be the same as the agent folder name (highlighted in the comments).
+
 import os,sys,io
 from google.adk.agents import Agent
 from google.adk.tools import ToolContext, AgentTool, load_artifacts
@@ -23,7 +27,6 @@ async def extract_title_with_gemini(tool_context: ToolContext) -> str:
         artifact_content = await tool_context.load_artifact(filename=most_recent_file)
         file_name = artifact_content.inline_data.display_name
         data_bytes = artifact_content.inline_data.data
-
 
         client = genai.Client(
             vertexai=True, 
